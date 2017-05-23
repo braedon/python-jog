@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jog',
-    version='0.1.0.dev1',
+    version='0.1.0b1',
     description='JSON Structured Logging for Python',
     url='https://github.com/Braedon/python-jog',
     author='Braedon Vickers',
