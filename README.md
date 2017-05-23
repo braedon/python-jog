@@ -23,10 +23,9 @@ log_handler = logging.StreamHandler()
 log_format = '[%(asctime)s] %(name)s.%(levelname)s %(threadName)s %(module)s.%(funcName)s %(filename)s:%(lineno)s %(message)s'
 log_handler.setFormatter(JogFormatter(log_format))
 
-logging.basicConfig(
-    level=logging.INFO,
-    handlers=[log_handler]
-)
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO)
+root_logger.addHandler(log_handler)
 ```
 
 # Development

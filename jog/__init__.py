@@ -14,9 +14,17 @@ class LoggingJSONEncoder(json.JSONEncoder):
 
 class JogFormatter(logging.Formatter):
 
-    def __init__(self, fmt=None, datefmt=None, style='%', fn=elk.format):
+    def __init__(self, fmt=None, datefmt=None, style=None, fn=elk.format):
         self.fn = fn
-        super(JogFormatter, self).__init__(fmt=fmt, datefmt=datefmt, style=style)
+        kwargs = {
+            'fmt': fmt,
+            'datefmt': datefmt
+        }
+        # Python2 logging.Formatter doesn't support the `style` parameter so
+        # only pass it on if passed to us.
+        if style:
+            kwargs['style'] = style
+        super(JogFormatter, self).__init__(**kwargs)
 
     def format(self, record):
         # Call this first as it changes the record, e.g. formatting exceptions.
