@@ -1,4 +1,23 @@
-from datetime import datetime, timezone
+from datetime import datetime, tzinfo, timedelta
+
+# Build our own UTC tzinfo, since datetime.timezone.utc doesn't
+# exist pre 3.2 and we want to support 2.x
+
+ZERO = timedelta(0)
+
+
+class UTC(tzinfo):
+    def utcoffset(self, dt):
+        return ZERO
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return ZERO
+
+
+utc = UTC()
 
 
 # Elasticsearch only supports a single type mapping for
@@ -45,7 +64,7 @@ def format(log_dict):
     created_timestamp = log_dict.pop('created')
     log_dict.update({
         '@version': 1,
-        '@timestamp': datetime.fromtimestamp(created_timestamp, tz=timezone.utc).isoformat()
+        '@timestamp': datetime.fromtimestamp(created_timestamp, tz=utc).isoformat()
     })
 
     # Drop some fields we don't need
