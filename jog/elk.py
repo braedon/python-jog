@@ -67,7 +67,9 @@ def format_log(log_dict):
         '@timestamp': datetime.fromtimestamp(created_timestamp, tz=utc).isoformat()
     })
 
-    # Drop some fields we don't need
+    # Drop some fields we don't need:
+    #  - asctime, msecs: we have formatted the timestamp in @timestamp
+    #  - exec_info: we'll keep the formatted exc_text version
     for field in ['asctime', 'msecs', 'exc_info']:
         if field in log_dict:
             del log_dict[field]
