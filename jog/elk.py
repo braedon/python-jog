@@ -59,7 +59,7 @@ def clean(o):
         return o
 
 
-def format(log_dict):
+def format_log(log_dict):
 
     created_timestamp = log_dict.pop('created')
     log_dict.update({

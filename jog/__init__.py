@@ -14,7 +14,7 @@ class LoggingJSONEncoder(json.JSONEncoder):
 
 class JogFormatter(logging.Formatter):
 
-    def __init__(self, fmt=None, datefmt=None, style=None, fn=elk.format):
+    def __init__(self, fmt=None, datefmt=None, style=None, fn=elk.format_log):
         self.fn = fn
         kwargs = {
             'fmt': fmt,
