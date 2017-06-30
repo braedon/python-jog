@@ -39,6 +39,7 @@ class JogFormatter(logging.Formatter):
         message_format = fields.pop('msg')
         # If the message is a dict use it directly
         if isinstance(message_format, (dict,)):
+            del fields['message']
             field_updates.update(message_format)
 
         # Otherwise it's a normal log record, so we need to format it
